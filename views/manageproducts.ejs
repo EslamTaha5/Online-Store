@@ -1,0 +1,68 @@
+<%- include('parts/top') %>
+<%- include('parts/nav') %>
+
+<div class = "container  h-100hv mt-4 p-3 shadow p-3 mb-5 bg-body-tertiary rounded text-center">
+    <br>
+    <h3>Manage Products</h3>
+    <form method="GET" >
+        <select name='category' class="form-control w-25">
+            <option value="all" <%= lst['all'] %> >All</option>
+            <option value="clothes" <%= lst['clothes'] %> >Clothes</option>
+            <option value="phones"<%= lst['phones'] %> >Phones</option>
+            <option value="computers" <%= lst['computers'] %> >Computers</option>
+            <option value="computer accessories" <%= lst['computer accessories'] %> >Computer Accessories</option>
+        </select>
+        <input type="submit" class="btn filter-btn mt-2" value="Filter">
+    </form> 
+
+    <% if(items.length == 0) { %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            No Orders Found
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <% } else {%>
+        <table class="table table-light table-striped table-hover table-bordered table-responsive mt-2">
+            <thead class="">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col" style="width:10%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i = 0 ;i<items.length;i++){ %>
+                    <tr>
+                        <th scope="row">
+                            <%= i+1 %>
+                        </th>
+                        <td>    
+                            <img src = "/images/<%= items[i].image %>" style = "height: 60px; width: 60px;">
+                        </td>
+                        <td>
+                            <%= items[i].name %>
+                        </td>
+                        <td>
+                            <%= items[i].price %>
+                        </td>
+                        <td>
+
+                            <form method = "post">
+                                <input type="hidden" name="productId" value="<%= items[i]._id %>">
+                                
+                                <input type="submit" class="btn btn-danger" value="Delete" formaction="/admin/product/delete">
+    
+                            </form>
+
+                        </td>
+                        
+                    </tr>
+                    <% } %>
+
+            </tbody>
+        </table>
+
+    <% } %>
+</div>
+<%- include('parts/bot') %>

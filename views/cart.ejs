@@ -1,0 +1,63 @@
+<%- include('parts/top.ejs') %>
+<%- include('parts/nav.ejs') %>
+<div class = "container  h-100hv mt-4 p-3 shadow p-3 mb-5 bg-body-tertiary rounded">
+        <%if(items.length == 0){%>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                No items in your Cart
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <% }else{ %>
+
+            <% if(validationsError) {%>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Error!</strong>
+                    <%= validationsError.msg %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <% } %>
+            <!--Products-->
+            <table class="table table-striped">
+                <thead>
+                    <tr style="text-align: center;">
+                        <th>#</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Amount</th>
+                        <th>Total</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody style = "text-align: center;">
+                    <% for(let i = 0; i < items.length; i++){ %>
+                        <tr>
+                            <th><%=i + 1%></th>
+                            <%console.log(items[i]) %>
+                            <td><%=items[i].name%></td>
+                            <td><%=items[i].price%></td>
+                            <form method = "post">
+                                <td>
+                                    <input type="number" name="amount" value="<%= items[i].amount %>">
+                                </td>
+                                <td>
+                                    <%= items[i].amount * items[i].price %>$
+                                </td>
+                                <input type="hidden" name="cardId" value="<%= items[i]._id %>">
+                                <td>
+                                    <input type="submit" class="btn btn-success" value="Save" formaction="/cart/save">
+                                    <input type="submit" class="btn btn-danger" value="Delete" formaction="/cart/delete">
+                                    <input type="submit" class="btn btn-success" value="Order" formaction="/cart/verifyorder">
+                                </td>
+                            </form>
+                        </tr>
+
+                    <% } %>
+                </tbody>
+            </table>
+            <form method="POST">
+                <input type="hidden" name="cardId" value="delete_all">
+                <input type="submit" class="btn btn-danger" value="Delete All" formaction="/cart/delete">
+            </form>
+        <% } %>
+
+</div>
+<%- include('parts/bot.ejs') %> 

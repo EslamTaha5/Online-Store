@@ -1,0 +1,87 @@
+<%- include('parts/top') %>
+<%- include('parts/nav') %>
+
+<div class = "container  h-100hv mt-4 p-3 shadow p-3 mb-5 bg-body-tertiary rounded text-center">
+    <br>
+    <h3>Manage Orders</h3>
+    <form action="/admin/orders" method="GET">
+        <select name='category' class="form-control">
+            <option value="All" <%= lst['all'] %> >All</option>
+            <option value="pending" <%= lst['pending'] %> >Pending</option>
+            <option value="sent" <%= lst['sent'] %> >Sent</option>
+            <option value="completed"<%= lst['completed'] %> >Completed</option>
+        </select>
+        <br>
+        <input type="text" class="form-control" name="email" placeholder="Email">
+        <br>
+        <input type="submit" class="btn filter-btn" value="Filter">
+    </form>
+    <% if(items.length == 0) { %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            No Orders Found
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <% } else {%>
+        <table class="table table-light table-striped table-hover table-bordered table-responsive mt-2">
+            <thead class="">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Cost</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">status</th>
+                    <th scope="col">time</th>
+                    <th scope="col" style="width:10%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i = 0 ;i<items.length;i++){ %>
+                    <tr>
+                        <th scope="row">
+                            <%= i+1 %>
+                        </th>
+                        <td>    
+                            <%= items[i].userEmail %>
+                        </td>
+                        <td>
+                            <%= items[i].name %>
+                        </td>
+                        <td>
+                            <%= items[i].amount %>
+                        </td>
+                        <td>
+                            <%= items[i].amount * items[i].price %>$
+                        </td>
+                        <td>
+                            <%= items[i].address %>
+                        </td>
+
+                        <form method="POST">
+                            <td>
+                                <select name='status' class="form-control">
+                                    <option value="pending" <%= items[i].lst['pending'] %> >Pending</option>
+                                    <option value="sent" <%= items[i].lst['sent'] %> >Sent</option>
+                                    <option value="completed"<%= items[i].lst['completed'] %> >Completed</option>
+                                </select>
+
+                            </td>
+
+                            <td>
+                                <%= items[i].final_date %>
+                            </td>
+                            <input type="hidden" name="orderId" value="<%= items[i]._id %>">
+                            <td>
+                                <input type="submit" class="btn btn-danger" value="Save" formaction="/admin/orders/save">
+                            </td>
+                        </form>
+                    </tr>
+                    <% } %>
+
+            </tbody>
+        </table>
+
+    <% } %>
+</div>
+<%- include('parts/bot') %>

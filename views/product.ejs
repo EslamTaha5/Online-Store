@@ -1,0 +1,40 @@
+<%- include('parts/top.ejs') %>
+<%- include('parts/nav.ejs') %>
+<div class = "container  h-100hv mt-4 p-3 shadow p-3 mb-5 bg-body-tertiary rounded">
+
+    <div class = "container">
+        <% if(validationsError){ %>
+            <div class = "alert alert-danger fade show">
+                <p>Error!</p>
+                <%= validationsError.msg%>
+                <button type = "button" class = "btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <% } %>
+        <div class = "row mt-3">
+            <div class = "col col-10 col-md-3 ">
+                <img src = "/images/<%= product.image%>" class = "card-image-top" style = "width:14rem;">
+                
+            </div>
+            <div class = "col col-10 col-md-3">
+                <h2>
+                    <%=product.name%>
+                </h2>    
+                <h4>Price : <%=product.price%>$</h4>
+                <h5>Description : </h6>
+                <p class="card-text lh-sm">
+                    <%= product.description %>
+                </p>
+                <form action = "/cart" method="post">
+                    <input type = "number" name = "amount" class = "form-control">
+                    <input type="hidden" name="name" value="<%= product.name %>">
+                    <input type="hidden" name="price" value="<%= product.price %>">
+                    <input type="hidden" name="productId" value="<%= product._id %>">
+                    <input type="hidden" name="redirectTo" value="/product/<%= product._id %>">
+                    <input type="submit" value="Add to Cart " class="btn add-cart mt-2 ">
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<%- include('parts/bot.ejs') %>

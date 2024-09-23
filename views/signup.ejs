@@ -1,0 +1,62 @@
+<%- include('parts/top.ejs') %>
+<%- include('parts/nav.ejs') %>
+    <div class = "container d-flex justify-content-center  mt-5  align-self-center">
+        <div class  = "w-50 d-flex justify-content-center rounded-4 border border-black shadow p-3 mb-5">
+            <form action = "/signup" method = "post"class = "w-100 bg-white d-flex flex-column justify-content-center p-1 m-3"> 
+                <p class = "mb-3 align-self-center">Sign Up</p>
+                <div class = "signup-form">
+                    <p>Name</p>
+                    <input type = "text" name = "name" placeholder = "Name" class="form-control"/>
+                    <%let err = validationErrors.find(err=> err.param == 'name')%>
+                    <%if(err){%>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert"></div>
+                            <strong>Error!</strong>
+                            <%= err.msg %>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <%}%>
+                </div>
+                <div class = "signup-form">
+                    <p>Email</p>
+                    <input type = "email" name = "email" class="form-control" placeholder="Email"/>
+                    <%let err2 = validationErrors.find(err=> err.param == 'email')%>
+                    <%if(err2){%>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert"></div>
+                            <strong>Error!</strong>
+                            <%= err2.msg %>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <%}%>
+                </div>
+                <div class = "signup-form">
+                    <p>Password</p>
+                    <input type = "password" class="form-control" name = "password" placeholder="Password"/>
+
+                    <%let err3 = validationErrors.find(err=> err.param == 'password')%>
+                    <%if(err3){%>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert"></div>
+                            <strong>Error!</strong>
+                            <%= err3.msg %>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <%}%>
+
+                </div>
+                <div class = "signup-form">
+
+                </div>
+                <div class="signup-form">
+                    <button type ="submit" class = "w-100 signup-btn-form">Sign Up</button>
+                </div>
+            </form>
+        </div>
+        <% if(authErr) {%>
+            <br>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Oops! Error</strong>
+                <%= authErr %>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <% } %>
+    </div>
+<%- include('parts/bot.ejs') %>

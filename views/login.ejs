@@ -1,0 +1,46 @@
+<%- include('parts/top.ejs') %>
+<%- include('parts/nav.ejs') %>
+<div class = "container d-flex justify-content-center  mt-5  align-self-center">
+    <div class  = "w-50 d-flex justify-content-center rounded-4 border border-black shadow p-3 mb-5">
+        <form action = "/login" method = "post" class = "w-100 bg-white d-flex flex-column justify-content-center p-1 m-3"> 
+            <p class = "mb-3 align-self-center">Log In</p>
+
+            <div class = "signup-form">
+                <p>Email</p>
+                <input type = "email" name = "email" class="form-control"/>
+                <%let err1 = validationErrors.find(err => err.param == 'email')%>
+                    <% if(err1){ %>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Error</strong>
+                            <%= err1.msg %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <% } %>
+            </div>
+            <div class = "signup-form">
+                <p>Password</p>
+                <input type = "password" name = "password" class="form-control"/>
+                <%let err2 = validationErrors.find(err => err.param == 'password')%>
+                    <% if(err2){ %>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Error</strong>
+                            <%= err2.msg %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <% } %>
+            </div>
+
+            <div class="signup-form">
+                <button type = "submit" class = "w-100 signup-btn-form">Log In</button>
+            </div>
+        </form>
+        <% if(loginError) {%>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Error</strong>
+                <%= loginError %>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <% } %>
+    </div>
+</div>
+<%- include('parts/bot.ejs') %>

@@ -1,0 +1,58 @@
+<%- include('parts/top.ejs') %>
+<%- include('parts/nav.ejs') %>
+    <div class = "container  h-100hv mt-4 p-3 shadow p-3 mb-5 bg-body-tertiary rounded">
+        <form action="/" method="GET" >
+            <select name='category' class="form-control w-25">
+                <option value="all" <%= lst['all'] %> >All</option>
+                <option value="clothes" <%= lst['clothes'] %> >Clothes</option>
+                <option value="phones"<%= lst['phones'] %> >Phones</option>
+                <option value="computers" <%= lst['computers'] %> >Computers</option>
+                <option value="computer accessories" <%= lst['computer accessories'] %> >Computer Accessories</option>
+            </select>
+            <input type="submit" class="btn filter-btn mt-2" value="Filter">
+        </form> 
+        <% if(valid) {%>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Oops Error!</strong>
+                <%= validationsError.msg %>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <% } %>
+        <% if(products.length == 0) {%>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Oops!</strong> No Products Found
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <% } %>
+        
+        <div class = "row">
+            <% for(let prod of products){%>
+                <div class = "col-md-3 col-sm-6 mt-2">
+                    <div class = "card" style = "width:15rem; height: 100%;">
+                        <img src="/images/<%= prod.image %>" class="card-img-top" style="width: 15rem; height: 15rem;">
+                        <div class = "card-body">
+                            <h4 class = "card-title">
+                                <a href = "/product/<%=prod._id%>" class = "prod-name">
+                                    <%=prod.name%>
+                                </a>
+                            </h4>
+                            <p class = "card-text">
+                                <%=prod.price%>$
+                            </p>
+                            <form action = "/cart" method = "post" class = "add-to-cart">
+                                <input type="number" name="amount" value="1" class="form-control">
+                                <input type="hidden" name="name" value="<%= prod.name %>">
+                                <input type="hidden" name="price" value="<%= prod.price %>">
+                                <input type="hidden" name="productId" value="<%= prod._id %>">
+                                <input type="hidden" name="redirectTo" value="/">
+                                <input type="submit" value="Add to Cart" class="btn add-cart mt-2">
+
+                            </form>
+                        </div>
+
+                    </div> 
+                </div>
+            <%}%>
+        </div>
+    </div>
+<%- include('parts/bot.ejs') %>

@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg bg-white border boder-danegr " >
+    <div class = "container ">
+        <div class="container-fluid outer-div justify-content-between">
+            <a class="navbar-brand" href="/">Online Store</a>
+            <%if(isAdmin){%>
+                <div class = "admin-view">
+                    <button class = "btn manage-products" onclick = "location.href='/admin/products'">Manage Products</button>
+                    <button class = "btn manage-products" onclick = "location.href='/admin/orders'">Manage Orders</button>
+                    <button class = "btn manage-products" onclick = "location.href='/admin/add'">Add Products</button>
+
+                </div>
+
+
+            <%}%>
+            <%if(isUser){%>
+                <div class = "sign-btn">
+                    <button class = "btn sign-in" onclick = "location.href='/cart'"><i class="bi bi-bag"></i></button>
+                    <button class = "btn sign-in dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person"></i>
+                    </button>
+                    <ul class="dropdown-menu" style = "left:auto;">
+                        <li><a class="dropdown-item" href="#">My Profile</a></li>
+                        <li><a class="dropdown-item" href="/orders">Orders</a></li>
+                        <li><a class="dropdown-item" onclick="logout()" style="cursor: pointer;">Log Out</a></li>
+
+                        
+                    </ul>
+                </div>
+            <%}else{%>
+
+                <div class = "sign-btn">
+                    <button class = "sign-in" onclick = "location.href='login'">Sign In</button>
+                    <button class = "sign-up" onclick = "location.href='signup'">Sign Up</button>
+                </div>
+                
+            <%}%>
+
+        </div>
+    </div>
+</nav>

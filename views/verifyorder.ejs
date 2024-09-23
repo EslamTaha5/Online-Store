@@ -1,0 +1,14 @@
+<%- include('parts/top') %>
+<%- include('parts/nav') %>
+
+<div class = "container  h-100hv mt-4 p-3 shadow p-3 mb-5 bg-body-tertiary rounded text-center">
+    <br>
+    <h3>Verify Order</h3>
+
+    <form method="POST" action="/orders">
+        <input type="hidden" name="cardId" value="<%= cardId %>">
+        <input type="text" class="form-control" name="address" placeholder="Address">     <br>
+        <input type="submit" class="btn order-btn" value="Order">
+    </form>
+</div>
+<%- include('parts/bot') %>

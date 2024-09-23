@@ -1,0 +1,41 @@
+/* Option 2: Import via CSS */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
+.outer-div{
+    display: flex;
+}
+.sign-btn{
+    display: flex;
+    justify-content: flex-end;
+}
+.sign-in, .sign-up,.signup-btn-form,.manage-products, .add-button, .add-cart,.filter-btn,.order-btn{
+    border:0;
+    margin-right: 5px;
+    background-color: black;
+    color: white;
+    line-height: 30px;
+}
+p{
+    padding:0;
+    margin:0;
+}
+.signup-form{
+    margin: 10px;
+}
+.productImage{
+    height: 300px;
+    width: 300px;
+}
+.prod-name{
+    text-decoration: none;
+    font-size: 2rem;
+    color: black;
+}
+.card-deck {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+  }
+  
+  .card {
+    flex: 1 0 auto;
+  }
