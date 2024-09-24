@@ -21,7 +21,7 @@ exports.addItem = (item)=>{
         .then(()=>{
             const newItem = new cartItem(item);
 
-            console.log(newItem);
+            //console.log(newItem);
             return newItem.save();
         })
         .then(()=>{

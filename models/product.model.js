@@ -57,7 +57,7 @@ exports.getProductById = id => {
 }
 
 exports.addProduct = (data) => {
-    console.log(`product\n ${JSON.stringify(data)}`);
+ //   console.log(`product\n ${JSON.stringify(data)}`);
     return new Promise((resolve, reject) => {
         mongoose.connect(Mongourl).then(() => {
             let prod = new product(data)

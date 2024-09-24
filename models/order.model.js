@@ -77,7 +77,7 @@ exports.getItemByUserId = (userId)=>{
 }
 
 exports.deleteItem = (orderId, userId) => {
-    console.log(orderId + ' ' + userId);
+  //  console.log(orderId + ' ' + userId);
     return new Promise((resolve, reject) => {
         mongoose.connect(Mongourl)
         .then(()=>{
